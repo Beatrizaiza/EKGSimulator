@@ -8,12 +8,20 @@
 #include <math.h>
 #include <stdio.h>
 #include "lcd.h"
+#define USE_ADC
+
+#ifndef USE_ADC
+xNew = ecgData[index++];
+#else
+// AD-Wandler starten,
+// xNew den neuen AD-Wert zuweisen
+#endif
 
 extern unsigned int ecgData[];
 extern unsigned int dataLen;
 
 unsigned int x = 0; // x[n]
-unsigned int xnach = 0; // X[n-1]
+unsigned int xnach = 0; // x[n-1]
 unsigned int xvor = 0;// x[n+1]
 unsigned int y1 = 0;// y[n]
 unsigned int y2 = 0;//y[n+1]
