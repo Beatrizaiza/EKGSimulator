@@ -35,7 +35,7 @@ unsigned int abstand; //wie wird es berechnet?
 // Algorithmus AF3 -??????
 int af3 (unsigned int a){
 
-    for (a+=1;a<=dataLen;a++){
+    for (a=1;a<=dataLen;a++){
 
         xvor = ecgData[a-1];
         xnach = ecgData[a+1];
