@@ -7,6 +7,7 @@
 #include <msp430fr6989.h>
 #include <math.h>
 #include <stdio.h>
+#include "ecgData.c"
 #include "lcd.h"
 #define USE_ADC
 
@@ -35,20 +36,16 @@ unsigned int abstand; //wie wird es berechnet?
 // Algorithmus AF3 -??????
 int af3 (unsigned int a){
 
-    for(a=1;a≤dataLen;a++){
+    for(a=1,a≤dataLen,a++;){
 
         xvor = ecgData[a-1];
-
         xnach = ecgData[a+1];
-
         y1= xnach-xvor;
 
         n++;
 
         xvor = ecgData[a-1];
-
         xnach = ecgData[a+1];
-
         y2= xnach-xvor;
 
         if (y1>800 && y2>800)
@@ -63,12 +60,11 @@ int af3 (unsigned int a){
     return isTrue;
 }
 
-void main(void){
+void V1(void){
     WDTCTL = WDTPW+WDTHOLD;
     SFRIE1 |= WDTIE; // WDT-interrupt freischalten
     _EINT(); // global interrupt enable
     LCD_Init();
-    ecgData_Init();
 
     int ekg = af3(n);
 
@@ -80,7 +76,7 @@ void main(void){
             abstand = newIndex-oldIndex;
             int puls= 60000/abstand;
             LCD_displayShort(puls);
-            newIndex = oldIndex;
+            oldIndex = newIndex;
         }
     }
 
@@ -95,3 +91,4 @@ __interrupt void tick(void){
     else
         n=0;
 }
+
