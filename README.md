@@ -149,3 +149,29 @@ if (y1>800 && y2>800)
 **************************Kann man es mit 2 unabhangig Timers machen?**************************
 
 Timer statt von Watchdog benutzen?
+
+# Variante 2
+
+### Implementierung unter Verwendung des Analogeingangs
+
+Das EKG liegt nun als analoges Signal am Kanal A10 (P9.2) an. Verwenden Sie als Referenzspannung 2.5 V (Register REFCTL0). Konfigurieren Sie P9SEL0 und P9SEL1 so, dass P9.2 als A10 verwendet
+wird (siehe MSP430FR6989 Data Sheet).
+Alle 8 ms soll ein neuer Wert digitalisiert werden. Wie bei Schritt 1 soll geprüft werden, ob ein QRSKomplex vorliegt und ggf. die Ausgabe der Pulsfrequenz erfolgen. 
+
+**Bei geschickter Implementierung müssen Sie lediglich die Erfassung des nächsten Messwerts anpassen.**
+Beide Varianten sollen durch bedingte Kompilierung in einer Quelldatei implementiert werden.
+Führen Sie dazu einen sog. Compilerschalter
+#define USE_ADC
+ein, über den Sie zwischen den beiden Varianten unterscheiden, z.B.
+#ifndef USE_ADC
+xNew = ecgData[index++];
+#else
+// AD-Wandler starten,
+// xNew den neuen AD-Wert zuweisen
+#endif
+Das Analogsignal erzeugt ein LaunchPad vom Typ MSP-EXP430FR4133. Dieses müssen Sie nicht
+programmieren, sondern lediglich einstellen. Die USB-Verbindung dient lediglich der Spannungsversorgung. Mit Button S2 (rechts) stellen Sie den Modus so ein, dass das HERZ-Symbol an ist. Mit
+Button S1 (links) können Sie nun zwischen drei Geschwindigkeiten (48/60/75) wählen:
+Abbildung 3: MSP-EXP430FR4133-LaunchPad
+Verbinden Sie per Kabel den Ausgang VA auf dem grünen DAC-Board (siehe Abbildung 3) mit dem
+Pin 9.2. Das EKG- Signal liegt nun in einer Endlosschleife am analogen Eingang des MSPEXP430FR6989 LauchPad an. Wie bei Variante 1 soll der QRS-Komplex bestimmt und die ermittelte Pulsfrequenz angezeigt werden.
