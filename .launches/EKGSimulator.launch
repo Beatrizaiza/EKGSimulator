@@ -16,6 +16,7 @@
     <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_PROGRAM.MSP430FR6989.ccxml.TI MSP430 USB1/MSP430" value="${build_artifact:EKGSimulator}"/>
     <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_PROJECT.MSP430FR6989.ccxml.TI MSP430 USB1/MSP430" value="EKGSimulator"/>
     <stringAttribute key="com.ti.ccstudio.debug.debugModel.ATTR_TARGET_CONFIG" value="${target_config_active_default:EKGSimulator}"/>
+    <stringAttribute key="com.ti.ccstudio.debug.debugModel.MRU_PROGRAM.MSP430FR6989.ccxml.TI MSP430 USB1/MSP430" value="${build_artifact:EKGSimulator}"/>
     <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
         <listEntry value="/EKGSimulator"/>
     </listAttribute>
